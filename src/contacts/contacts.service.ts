@@ -1,25 +1,53 @@
 import { Injectable } from '@nestjs/common';
-
+import { Prisma } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class ContactsService {
-  create(createContactDto: unknown) {
-    return 'This action adds a new contact';
+  async create(createContactDto: Prisma.ContactCreateInput) {
+    const prisma = new PrismaClient();
+    const contact = await prisma.contact.create({
+      data: createContactDto
+    });
+    return contact;
   }
 
-  findAll() {
-    return `This action returns all contacts`;
+  async findAll() {
+    const prisma = new PrismaClient();
+    const contacts = await prisma.contact.findMany();
+    return contacts;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} contact`;
+  async findOne(id: number) {
+    const prisma = new PrismaClient();
+    const contact = await prisma.contact.findUnique(
+      {
+        where: {
+          id
+        }
+      }
+    )
+    return contact;
   }
 
-  update(id: number, updateContactDto: unknown) {
-    return `This action updates a #${id} contact`;
+  async update(id: number, updateContactDto: Prisma.ContactUpdateInput) {
+    const prisma = new PrismaClient();
+    const updatedContact = await prisma.contact.update({
+      where: {
+        id
+      },
+      data: updateContactDto
+    })
+    return updatedContact;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} contact`;
+  async remove(id: number) {
+    const prisma = new PrismaClient();
+    const deletedContact = prisma.contact.delete({
+      where: {
+        id
+      }
+    })
+    return deletedContact;
   }
 }

@@ -1,12 +1,13 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ContactsService } from './contacts.service';
+import { Prisma } from '@prisma/client';
 
 @Controller('contacts')
 export class ContactsController {
   constructor(private readonly contactsService: ContactsService) {}
 
   @Post()
-  create(@Body() createContactDto: unknown) {
+  create(@Body() createContactDto: Prisma.ContactCreateInput) {
     return this.contactsService.create(createContactDto);
   }
 
@@ -21,7 +22,7 @@ export class ContactsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateContactDto: unknown) {
+  update(@Param('id') id: string, @Body() updateContactDto: Prisma.ContactUpdateInput) {
     return this.contactsService.update(+id, updateContactDto);
   }
 
