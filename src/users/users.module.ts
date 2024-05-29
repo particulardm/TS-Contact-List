@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { DatabaseModule } from 'src/database/database.module';
+import { BcryptModule } from 'src/bcrypt/bcrypt.module';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, BcryptModule],
   controllers: [UsersController],
   providers: [UsersService],
 })

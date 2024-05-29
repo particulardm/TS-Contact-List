@@ -4,9 +4,10 @@ import { AppService } from './app.service';
 import { ContactsModule } from './contacts/contacts.module';
 import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './users/users.module';
+import { BcryptModule } from './bcrypt/bcrypt.module';
 
 @Module({
-  imports: [ContactsModule, DatabaseModule, UsersModule],
+  imports: [ContactsModule, DatabaseModule, UsersModule, BcryptModule],
   controllers: [AppController],
   providers: [AppService],
 })
