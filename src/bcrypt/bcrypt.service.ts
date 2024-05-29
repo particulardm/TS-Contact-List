@@ -8,4 +8,8 @@ export class BcryptService {
     async hash(pass: string) {
         return await bcrypt.hash(pass, this.salt);
     }
+
+    async compare(pass: string, hash: string) {
+        return await bcrypt.compare(pass, hash);
+    }
 }
