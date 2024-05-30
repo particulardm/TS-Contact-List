@@ -14,7 +14,6 @@ dotenv.config();
   imports: [ContactsModule,
             DatabaseModule,
             UsersModule,
-            BcryptModule,
             JwtModule.register({
               global: true,
               secret: process.env.JWT_SECRET,
